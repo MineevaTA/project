@@ -2,12 +2,19 @@
 
 {% block content %}
 	{% for post in posts %}
+	<hr>
 	<div class="post">
 		<div class="date">
-			<p>Опубликовано: {{ post.published_date }}</p>
+			{% if post.published_date %}
+				<p>Опубликовано: {{ post.published_date }}</p>
+			{% else %}
+				<p>Не опубликовано: {{ post.published_date }}</p>
+			{% endif %}
+			<p>Автор: {{ post.author }}</p>
 		</div>
-		<h1><a href="">{{ post.title }}</a></h1>
+		<h1><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
 		<p>{{ post.text|linebreaksbr }}</p>
+		<p>Комментарии: {{ post.comments.count }}</p>
 	</div>
 	{% endfor %}
 {% endblock %}

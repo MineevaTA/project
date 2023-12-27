@@ -7,10 +7,16 @@
 	<link rel="stylesheet" href="{% static 'blog/css/theme.css' %}">
 </head>
 
-<body>
+<body bgcolor=#fbebfc>
 	{% block header %}
 	<div class="page-header">
-		<h1><a href="/">Главная страница</a></h1>
+		{% if request.user.is_authenticated %}
+			<a href="{% url 'logout' %}" class="top-menu"><span class="glyphicon glyphicon-log-out"></span> Выйти</a>
+			<a href="{% url 'post_add' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Добавить пост</a>
+		{% else %}
+			<a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-log-in"></span>Войти</a>
+		{% endif %}
+		<h1><center><a href="/">Главная страница</a></center></h1>
 	</div>
 	{% endblock %}
 	<div>
